@@ -9,7 +9,7 @@ PROXIES = None
 
 def get_conversation(url):
     try:
-        response = requests.get('https://chatgpt.com/share/678201ac-2b88-8006-9b0e-103e27e76863', proxies=PROXIES, timeout=10)
+        response = requests.get(url, proxies=PROXIES, timeout=10)
 
         soup = BeautifulSoup(response.text, 'html.parser')
         body = soup.find('body')
@@ -45,6 +45,8 @@ with open('bing_search_results/chatgpt_share_urls_2k_sample.json', 'r') as f:
     urls = json.load(f)
 
 for url, url_detail in urls.items():
+    print(url, flush=True)
+
     conv_html, conv_distilled = get_conversation(url)
     fname = url.split('/')[-1]
     with open(f'conversations/{fname}.html', 'w') as f:
@@ -52,6 +54,5 @@ for url, url_detail in urls.items():
     with open(f'conversations/{fname}.json', 'w') as f:
         json.dump(conv_distilled, f)
 
-    time.sleep(3)
-    
-    break
+    time.sleep(60)
+    # break
