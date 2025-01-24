@@ -2,7 +2,8 @@ env/
 venv/
 conversations/
 .gitignore
-*out*
+out*
 nohup*
-bing_search_results/
+bing_results/
 tmp*
+common_crawl/
